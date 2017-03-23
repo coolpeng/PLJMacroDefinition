@@ -41,13 +41,11 @@
 #define kStatusBarHeight  (20.f)
 #define kTabBarHeight     (49.f)
 
-
 // View Frame 相关宏定义
 #define X(v)           (v).frame.origin.x
 #define Y(v)           (v).frame.origin.y
 #define kWidth(v)      (v).frame.size.width
 #define kHeight(v)     (v).frame.size.height
-
 #define kMinX(v)       CGRectGetMinX((v).frame) // 获得控件屏幕的x坐标(view.left)
 #define kMinY(v)       CGRectGetMinY((v).frame) // 获得控件屏幕的Y坐标(view.top)
 #define kMidX(v)       CGRectGetMidX((v).frame) //横坐标加上到控件中点坐标(view.center.x)
@@ -72,11 +70,24 @@
 #define kNotificationCenter  [NSNotificationCenter defaultCenter]
 
 
+//字符串是否为空
+#define kStringIsEmpty(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str length] < 1 ? YES : NO )
+//数组是否为空
+#define kArrayIsEmpty(array) (array == nil || [array isKindOfClass:[NSNull class]] || array.count == 0)
+//字典是否为空
+#define kDictIsEmpty(dic) (dic == nil || [dic isKindOfClass:[NSNull class]] || dic.allKeys == 0)
+//是否是空对象
+#define kObjectIsEmpty(_object) (_object == nil \
+|| [_object isKindOfClass:[NSNull class]] \
+|| ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
+|| ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))
+
+
 // 打印功能
 #ifdef DEBUG
-#define Log(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+#define NSLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
 #else
-#define Log(...)
+#define NSLog(...)
 
 #endif
 
